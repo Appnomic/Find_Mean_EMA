@@ -1,0 +1,65 @@
+---
+title: "mean"
+author: "Jaisri"
+date: "April 1, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+set.seed(1)
+```
+
+```{r mean}
+find_mean <- function(x,n)
+  {count<-length(x)
+  ## Checks if the first element is NA if yes then replace with 0
+  if(is.na(x[1])=="TRUE")
+  {x[1]<-0}
+   ## For loop starts
+       for (i in 2:n)
+	   { ### if the values are less than n
+          if(is.na(x[i])=="TRUE")
+           {x[i]<-mean(x[1:(i-1)])}		
+		}
+		### if the values are greater than n
+		for (i in n+1:(count-n))
+		{
+        if(is.na(x[i])=="TRUE")
+        {x[i]<-mean(x[(i-n):(i-1)])}
+		} 
+  print(x)
+  		}
+```
+
+
+```{r find_ema}
+find_ema<-function(x,n)
+{count<-length(x)
+## Checks if the first element is NA if yes then replace with 0
+  if(is.na(x[1])=="TRUE")
+  {x[1]<-0}
+  mul<-(2/(n+1))
+  resmul<-(1-mul)
+   ## For loop starts
+   for (i in 2:n)
+	   { ### if the values are less than n
+          if(is.na(x[i])=="TRUE")
+          {if(i==n)
+          { avg<-mean(x[1:(i-1)])
+            x[i]<-mul*(x[i-1]-avg)+avg}
+          else {x[i]<-mean(x[1:(i-1)])}		
+		}}
+   for (i in n+1:(count-n))
+   {if(is.na(x[i])=="TRUE")
+   {
+      if(i==(n+1))
+	  {avg<-mean(x[(i-n):(i-1)])
+	  x[i]<-mul*(x[i-1]-avg)+avg}
+	  else{
+   {x[i]<-(mul*(x[i-1]-x[i-2])+x[i-2])}
+      }}}
+	  print(x)
+	  }
+```
+
