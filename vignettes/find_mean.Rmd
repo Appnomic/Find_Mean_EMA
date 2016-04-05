@@ -1,0 +1,33 @@
+---
+title: "mean"
+author: "Jaisri"
+date: "April 1, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+set.seed(1)
+```
+
+```{r mean}
+find_mean <- function(x,n)
+  {count<-length(x)
+  ## Checks if the first element is NA if yes then replace with 0
+  if(is.na(x[1])=="TRUE")
+  {x[1]<-0}
+   ## For loop starts
+       for (i in 2:n)
+	   { ### if the values are less than n
+          if(is.na(x[i])=="TRUE")
+           {x[i]<-mean(x[1:(i-1)])}		
+		}
+		### if the values are greater than n
+		for (i in n+1:(count-n))
+		{
+        if(is.na(x[i])=="TRUE")
+        {x[i]<-mean(x[(i-n):(i-1)])}
+		} 
+  print(x)
+  		}
+```
